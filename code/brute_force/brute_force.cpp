@@ -16,7 +16,7 @@ int main(){
 
     for (auto& [s, t] : testCases){
 
-        auto diff = brute_force::sequenceDifference(s, t);
+        auto diff = fuerza_bruta::sequenceDifference(s, t);
 
         cout << diff.size() << "\n";
 

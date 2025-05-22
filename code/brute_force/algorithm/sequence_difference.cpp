@@ -4,6 +4,7 @@
 #include <utility>
 
 using namespace std;
+
 namespace fuerza_bruta
 {
 namespace detalle
@@ -59,7 +60,7 @@ sequenceDifference(const string& s, const string& t){
                 bloqueT.push_back(t[j++]);
 
             if (!bloqueS.empty() || !bloqueT.empty())
-                diferencias.emplace_back(move(bloqueS), move(bloqueT));
+                diferencias.emplace_back(std::move(bloqueS), std::move(bloqueT));
         }
     }
 
