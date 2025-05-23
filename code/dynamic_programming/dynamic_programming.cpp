@@ -25,9 +25,9 @@ int main(){
         for (auto& [a, b] : diferencias){
             cout << a;
             if (!b.empty())
-                cout << " " << b;
+                cout << ' ' << b;
+            cout << '\n';
         }
     }
-            cout << '\n';
     return 0;
 }
