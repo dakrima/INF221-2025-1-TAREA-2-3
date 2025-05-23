@@ -4,9 +4,8 @@ BC E
 G F
  R
 4
-A 
+A
 G Z
  Z
  M
-1
-un otro
+0

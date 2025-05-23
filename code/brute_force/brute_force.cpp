@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include "algorithm/sequence_difference.h"
@@ -7,25 +8,33 @@
 using namespace std;
 
 int main(){
-    vector<pair<string, string>> testCases = {
-        { "ABCLGH", "AELFHR" },
-        {"AGGJAB", "GZJZAMB"}
-    };
 
-    cout << testCases.size() << "\n";
+    ifstream entrada("data/brute_force_input/inputs.txt");
+    ofstream salida("data/brute_force_output/outputs.txt");
 
-    for (auto& [s, t] : testCases){
+    size_t K;
+    entrada >> K;
+    salida << K << "\n";
+
+    for (size_t caso = 0; caso < K; ++caso){
+        size_t n, m;
+        string s, t;
+
+        entrada >> n;
+        entrada.ignore();
+        getline(entrada, s);
+
+        entrada >> m;
+        entrada.ignore();
+        getline(entrada, t);
 
         auto diff = fuerza_bruta::sequenceDifference(s, t);
 
-        cout << diff.size() << "\n";
-
+        salida << diff.size() << "\n";
         for (auto& [a, b] : diff){
-            cout << a;
-
-            if (!b.empty())
-                cout << " " << b;
-            cout << "\n";
+            salida << a;
+            if (!b.empty()) salida << " " << b;
+            salida << "\n";
         }
     }
 
