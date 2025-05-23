@@ -8,6 +8,5 @@ code/matrix_multiplication/data/matrix_input/*.txt
 !code/matrix_multiplication/data/matrix_input/16_densa_D0_a_1.txt
 !code/matrix_multiplication/data/matrix_input/16_densa_D0_a_2.txt
 
-.vscode
-brute_force
-dp_solver
+.vscodes
+settings.json
