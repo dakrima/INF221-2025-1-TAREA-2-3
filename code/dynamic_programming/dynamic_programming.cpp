@@ -41,7 +41,7 @@ int main(){
         entrada.ignore();
         getline(entrada, t);
 
-        sumaLongitudes += s.size() + t.size();
+        sumaLongitudes += s.size();
 
         auto diff = pd::sequenceDifference(s, t);
 

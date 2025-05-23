@@ -23,4 +23,4 @@ def generar_inputs(nombre_archivo_input: str = 'inputs.txt', casos: int = 5, min
             f.write(f"{len_t} {t}\n")
 
 if __name__ == '__main__':
-    generar_inputs(nombre_archivo_input='inputs.txt', casos=3, min_len=1, max_len=25)
+    generar_inputs(nombre_archivo_input='inputs.txt', casos=4, min_len=20, max_len=20)
