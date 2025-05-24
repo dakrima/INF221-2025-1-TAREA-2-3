@@ -10,3 +10,4 @@ code/matrix_multiplication/data/matrix_input/*.txt
 
 .vscode
 settings.json
+.DS_Store
