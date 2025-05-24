@@ -1,8 +1,27 @@
-\begin{mdframed}
-    \textbf{La extensión máxima para esta sección es de 6 página.}
-\end{mdframed}
+Para realizar los casos de prueba de los algoritmos implementados se utilizó Hardware, entorno de software y condiciones de entrada especificas.
 
+\paragraph{\textbf{Descripción del Hardware.}
+} \leavevmode
 
-\epigraph{``\textit{Non-reproducible single occurrences are of no significance to
-science.}''}{---\citeauthor{popper2005logic},\citeyear{popper2005logic} \cite{popper2005logic}}
-En la sección de Experimentos, es fundamental detallar la infraestructura utilizada para asegurar la reproducibilidad de los resultados, un principio clave en cualquier experimento científico. Esto implica especificar tanto el hardware (por ejemplo, procesador Intel Core i7-9700K, 3.6 GHz, 16 GB RAM DDR4, almacenamiento SSD NVMe) como el entorno software (sistema operativo Ubuntu 20.04 LTS, compilador g++ 9.3.0, y cualquier librería relevante). Además, se debe incluir una descripción clara de las condiciones de entrada, los parámetros utilizados y los resultados obtenidos, tales como tiempos de ejecución y consumo de memoria, que permitan a otros replicar los experimentos en entornos similares. \textit{La replicabilidad es un aspecto crítico para validar los resultados en la investigación científica computacional} \cite{inbookFonseca}.
+Se utilizó un MacBook Air Apple M2 (2022) con la especificaciones siguientes \cite{apple2024macbook}:
+\begin{itemize}
+    \item \textbf{Procesador:} Chip M2 Apple con 4 núcleos de rendimiento @3.49 GHz y 4 núcleos de eficiencia @2.42 GHz. GPU de 8 núcleos. Neural Engine de 16 núcleos.
+    \item \textbf{Memoria RAM:} 8 GB de memoria unificada LPDDR5.
+    \item \textbf{Almacenamiento SSD:} 256 GB de almacenamiento SSD.
+\end{itemize}
+
+\paragraph{\textbf{Entorno de Software.}
+} \leavevmode
+
+\begin{itemize}
+    \item \textbf{Sistema Operativo:} macOS Sequoia 15.0.1.
+    \item \textbf{Compilador C++:} Se utiliza el compilador g++ 16.0.0, con el estándar de C++17: -std=c++17
+\end{itemize}
+
+\paragraph{\textbf{Condiciones de entrada.}} \leavevmode
+
+Durante los experimentos se utilizaron condiciones de entrada controladas y reproducibles, permitiendo comparar de manera consistente el comportamiento de los algoritmos evaluados bajo los mismos parámetros.
+
+\begin{itemize}
+    \item \textbf{Cadenas de texto:} Para evaluar ambos algoritmos, se generaron pares de cadenas de texto de manera aleatoria, con longitudes variables desde 2 hasta 20 caracteres. Estas cadenas fueron construidas a partir de letras mayúsculas del alfabeto inglés, utilizando un script generador programado en Python. Cada par de cadenas fue procesado siguiendo el mismo formato especificado en el enunciado de la tarea: para cada caso, se almacena la longitud de la cadena, seguida de la cadena misma en una línea separada.
+\end{itemize}

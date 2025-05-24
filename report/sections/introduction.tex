@@ -1,26 +1,13 @@
-\begin{mdframed}
-    \textbf{La extensión máxima para esta sección es de 2 páginas.}
-\end{mdframed}
+El presente trabajo se situa en el campo del Análisis y Diseño de Algoritmos en Ciencias de la Computación, un área fundamental para resolver problemas computacionales de manera eficaz y eficiente. Dentro de este campo, los problemas de edición y comparación de cadenas de texto han recibido gran atención, especialmente en aplicaciones que requieren medir similitudes entre secuencias, como el procesamiento de lenguaje natural, la bioinformática \cite{contreras2018algoritmos} y la corrección ortográfica. Entre las distintas métricas para medir similitud o diferencia entre secuencias, el análisis de la subsecuencia común más larga (LCS, por sus siglas en inglés) destaca como una herramienta fundamental.
 
-La introducción de este tipo de informes o reportes, tiene como objetivo principal \textbf{contextualizar el problema que se va a analizar}, proporcionando al lector la información necesaria para entender la relevancia del mismo. 
+\vspace{0.5 cm}
 
-Es fundamental que en esta sección se presenten los antecedentes del problema, destacando investigaciones previas o principios teóricos que sirvan como base para los análisis posteriores. Además, deben explicarse los objetivos del informe, que pueden incluir la evaluación de un algoritmo, la comparación de métodos o la validación de resultados experimentales.
+Una de las estrategias más utilizadas para comparar cadenas es el uso de la subsecuencia común más larga, la cual permite identificar los segmentos que se comparten entre dos secuencias. A partir de la LCS, es posible deducir los fragmentos que difieren entre ambas, lo que permite no solo cuantificar su diferencia sino también obtener una representación visual de estas mismas.
 
-Aunque la estructura y el enfoque siguen principios de trabajos académicos, se debe recordar que estos informes no son publicaciones científicas formales, sino trabajos de pregrado. Por lo tanto, se busca un enfoque claro y directo, que permita al lector comprender la naturaleza del problema y los objetivos del análisis, sin entrar en detalles excesivos. 
+\vspace{0.5 cm}
 
+El propósito de este informe es estudiar y comparar dos enfoques algorítmicos para resolver este problema: el método de fuerza bruta, basado en una búsqueda exhaustiva de todas las subsecuencias comunes, y el método de programación dinámica, que optimiza la búsqueda al ir recordando lo que ya ha calculado, en lugar de volver a hacerlo desde cero. Ambos algoritmos serán evaluados en cuanto a su eficiencia y efectividad para detectar las diferencias entre dos cadenas de texto, analizando cómo escalan en tiempo frente a entradas de diferentes tamaños.
 
-Introduction Checklist de \citetitle{GoodScientificPaper} \cite{GoodScientificPaper}, adaptada a nuestro contexto:
+\vspace{0.5 cm}
 
-\begin{itemize}
-\item Indique el \textbf{campo del trabajo} (Análisis y Diseño de algoritmos en Ciencias de la Computación), por qué este campo es importante y qué se ha hecho ya en este área, con las \textbf{citas} adecuadas de la literatura académica o fuentes relevantes.
-\item Identifique una \textbf{brecha} en el conocimiento, un desafío práctico, o plantee una \textbf{pregunta} relacionada con la eficiencia, complejidad o aplicabilidad de un algoritmo particular.
-\item Resuma el propósito del informe e introduzca el análisis o experimento, dejando claro qué se está investigando o comparando, e indique \textbf{qué es novedoso} o por qué es significativo en el contexto de un curso de pregrado.
-\item Evite; repetir el resumen; proporcionar información innecesaria o fuera del alcance de la materia (limítese al análisis de algoritmos o conceptos de complejidad); exagerar la importancia del trabajo (recuerde que se trata de un informe de pregrado); afirmar novedad sin una comparación adecuada con lo enseñado en clase o la bibliografía recomendada.
-\end{itemize}
-
-
-
-\begin{mdframed}
-Recuerde que este es su trabajo, y sólo usted puede expresar con precisión lo que ha aprendido y quiere transmitir. Si lo hace bien, su introducción será más significativa y valiosa que cualquier texto automatizado. ¡Confíe en sus habilidades, y verá que puede hacer un mejor trabajo que cualquier herramienta que automatiza la generación de texto!
-\end{mdframed}
-
+Este estudio permite introducir conceptos avanzados como el uso de programación dinámica para optimizar procesos combinatorios, y explorar las ventajas y limitaciones de los enfoques de fuerza bruta frente a técnicas algorítmicas más eficientes. El informe tiene como objetivo proporcionar una visión tanto práctica como teórica de cada paradigma, ofreciendo una base sólida para el análisis de algoritmos en contextos donde la comparación entre secuencias es una operación fundamental.

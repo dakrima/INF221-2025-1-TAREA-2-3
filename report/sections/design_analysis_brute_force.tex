@@ -1,42 +1,84 @@
-\epigraph{\textit{``Indeed, brute force is a perfectly good technique in many cases; the real question is, can we use brute force in such a way that we avoid the worst-case behavior?''}}{--- \citeauthor{taocv3}, \citeyear{taocv3} \cite{taocv3}}
+La solución de fuerza bruta desarrollada en esta tarea \cite{GfG2025LCS} \cite{Programiz2025LCS} busca identificar las diferencias entre dos secuencias de texto a partir de la subsecuencia común más larga (LCS, por sus siglas en inglés). Para ello, el algoritmo explora exhaustivamente todas las posibles subsecuencias comunes entre dos cadenas, con el fin de encontrar aquella de mayor longitud. Esta subsecuencia se utiliza posteriormente para determinar los fragmentos que difieren entre ambas cadenas. Debido a la naturaleza exhaustiva de este enfoque, el algoritmo resulta poco eficiente cuando se trabaja con cadenas largas.
+
+\vspace{0.5 cm}
+
+La solución se implementa mediante una función recursiva que explora todas las combinaciones posibles de caracteres compartidos entre las dos cadenas. El algoritmo comienza comparando los primeros caracteres de ambas cadenas. Si coinciden, se agregan a la subsecuencia común y se continúa con los siguientes índices. En caso contrario, se realizan dos llamadas recursivas: una avanzando en la primera cadena y otra avanzando en la segunda, evaluando así todas las posibilidades. Una vez obtenida la LCS, se recorre nuevamente cada cadena para identificar los bloques que no pertenecen a dicha subsecuencia, generando así los pares de substrings que representan las diferencias entre ambas.
+
+\vspace{0.5 cm}
+
+Este enfoque garantiza una solución correcta, ya que evalúa todas las opciones posibles para obtener la LCS. Sin embargo, su principal desventaja es el alto costo computacional. La complejidad temporal del algoritmo es exponencial, ya que en el peor de los casos el número de llamadas recursivas crece de manera combinatoria. Para dos cadenas de longitudes \texttt{n} y \texttt{m}, la complejidad temporal se puede expresar de la siguiente manera: \[O(2^{\max(n, m)})\] Esto se debe a que cada posición puede generar múltiples caminos posibles según las decisiones tomadas. Como consecuencia, el enfoque de fuerza bruta se vuelve impractico e infructifero para entradas largas, siendo útil únicamente para analizar instancias pequeñas.
+
+\vspace{0.5 cm}
+
+En cuanto al análisis espacial, el principal consumo de memoria proviene de la pila de llamadas recursivas. Cada vez que el algoritmo compara caracteres, realiza una nueva llamada recursiva que se mantiene en la pila hasta retornar. Esto implica un uso de memoria proporcional a la profundidad máxima de la recursión, que en el peor caso es: \[O({\max(n, m)})\] Esta complejidad espacial es aceptable en términos de uso de memoria, aunque no compensa la ineficiencia temporal en instancias grandes.
 
 \begin{algorithm}[H]
     \SetKwProg{myproc}{Procedure}{}{}
-    \SetKwFunction{AlgorithmName}{AlgorithmName}  % Cambia 'AlgorithmName' por el nombre del enfoque elegido
-    \SetKwFunction{AuxiliaryFunction}{AuxiliaryFunction}  % Función auxiliar de ejemplo
+    \SetKwFunction{LCSBT}{LCSBT}
+    \SetKwFunction{LCSFuerzaBruta}{LCSFuerzaBruta}
+    \SetKwFunction{SequenceDifference}{SequenceDifference}
     
     \DontPrintSemicolon
     \footnotesize
 
-    % Definición del algoritmo principal
-    \myproc{\AlgorithmName{S1, S2}}{
-    \uIf{S1 está vacía}{
-        \Return longitud de S2\;  % Return explícito si S1 está vacía
-    }
-    \uElseIf{S2 está vacía}{
-        \Return longitud de S1\;  % Return explícito si S2 está vacía
-    }
-    \uElseIf{S1[0] = S2[0]}{
-        \Return \AlgorithmName{S1[1:], S2[1:]}  % Llamada recursiva
-    }
-    \Else{
-        % Ejemplo de llamado a una función auxiliar
-        $costo \leftarrow \AuxiliaryFunction{S1, S2}$\;
-        \Return costo\;  % Retornar el valor calculado
-    }
+    \myproc{\LCSBT{s, i, t, j, actual, mejor}}{
+        \uIf{$i = \text{largo}(s)$ \textbf{or} $j = \text{largo}(t)$}{
+            \uIf{$\text{largo}(actual) > \text{largo}(mejor)$}{
+                mejor $\leftarrow$ actual\;
+            }
+            \Return\;
+        }
+
+        \uIf{$s[i] = t[j]$}{
+            agregar $s[i]$ a actual\;
+            \LCSBT{s, i+1, t, j+1, actual, mejor}\;
+            quitar último carácter de actual\;
+        }
+
+        \LCSBT{s, i+1, t, j, actual, mejor}\;
+        \LCSBT{s, i, t, j+1, actual, mejor}\;
     }
 
-    % Definición de la función auxiliar
-    \myproc{\AuxiliaryFunction{S1, S2}}{
-    % Acciones o cálculos auxiliares
-    \uIf{S1 y S2 son similares}{
-        \Return algún valor o costo\;  % Retornar el valor calculado por la función auxiliar
+    \myproc{\LCSFuerzaBruta{s, t}}{
+        actual $\leftarrow$ cadena vacía\;
+        mejor $\leftarrow$ cadena vacía\;
+        \LCSBT{s, 0, t, 0, actual, mejor}\;
+        \Return mejor\;
     }
-    \Else{
-        % Llamar de nuevo a la función principal
-        \Return \AlgorithmName{S1 modificado, S2}\;  % Llamada recursiva y retorno del resultado
+
+    \myproc{\SequenceDifference{s, t}}{
+        lcs $\leftarrow$ \LCSFuerzaBruta{s, t}\;
+        diferencias $\leftarrow$ lista vacía\;
+
+        $i, j, k \leftarrow 0$\;
+
+        \While{$i < \text{largo}(s)$ \textbf{or} $j < \text{largo}(t)$}{
+            \uIf{$k < \text{largo}(lcs)$ \textbf{and} $i < \text{largo}(s)$ \textbf{and} $j < \text{largo}(t)$ \textbf{and} $s[i] = t[j]$ \textbf{and} $s[i] = lcs[k]$}{
+                $i++, j++, k++$\;
+            }
+            \Else{
+                bloqueS, bloqueT $\leftarrow$ cadenas vacías\;
+
+                \While{$i < \text{largo}(s)$ \textbf{and} $(k \geq \text{largo}(lcs)$ \textbf{or} $s[i] \neq lcs[k])$}{
+                    agregar $s[i]$ a bloqueS\;
+                    $i++$\;
+                }
+
+                \While{$j < \text{largo}(t)$ \textbf{and} $(k \geq \text{largo}(lcs)$ \textbf{or} $t[j] \neq lcs[k])$}{
+                    agregar $t[j]$ a bloqueT\;
+                    $j++$\;
+                }
+
+                \If{bloqueS $\neq$ vacío \textbf{or} bloqueT $\neq$ vacío}{
+                    agregar (bloqueS, bloqueT) a diferencias\;
+                }
+            }
+        }
+
+        \Return diferencias\;
     }
-    }
-    \caption{Este es solo un ejemplo de cómo estructurar el pseudocódigo, con retornos explícitos y llamados a funciones.}
-    \label{alg:mi_algoritmo_1}
+
+    \caption{Algoritmo de Fuerza Bruta para Diferencias entre Secuencias}
+    \label{alg:secuencia_fuerza_bruta}
 \end{algorithm}
+

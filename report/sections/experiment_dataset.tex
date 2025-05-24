@@ -1,16 +1,13 @@
-\begin{mdframed}
-    \textbf{La extensión máxima para esta sección es de 2 páginas.}
-\end{mdframed}
+Para realizar los experimentos, se generaron casos de prueba compuestos por pares de cadenas de texto, con el principal objetivo de evaluar el rendimiento de los algoritmos de fuerza bruta y programación dinámica. Los strings fueron generados de forma aleatoria utilizando caracteres en mayúsculas del abecedario inglés.
 
-Diseñe casos de prueba que cubran varios escenarios (e.g., secuencias vacías, secuencias con caracteres repetidos, secuencias que no tienen diferencias, tienen pocas o varias diferencias, etc).  
-Es importante generar varias muestras con características similares para una misma entrada, por ejemplo, variando el tamaño del input dentro de lo que les permita la infraestructura utilizada en este informe, con el fin de capturar una mayor diversidad de casos y obtener un análisis más completo del rendimiento de los algoritmos.
+\vspace{0.5 cm}
 
-En esta sección es importante que describa cómo generó los casos de prueba y el porqué.
+Los tamaños de entrada utilizados van desde los 2 hasta los 20 caracteres por cadena, lo que fue suficiente para evidenciar diferencias de rendimiento entre ambos algoritmos sin comprometer demasiado el tiempo de ejecución del enfoque de fuerza bruta, cuya complejidad impide trabajar con longitudes demasiado largas. A partir de estos rangos, se generaron 4 pares de cadenas para cada tamaño, con el fin de obtener una medición más robusta del comportamiento del tiempo de ejecución.
 
-\begin{mdframed}
-    Aunque la implementación de los algoritmos debe ser realizada en C++, se recomienda aprovechar otros lenguajes como Python para automatizar la generación de casos de prueba, ya que es más amigable para crear gráficos y realizar análisis de los resultados. Python, con sus bibliotecas como \texttt{matplotlib} o \texttt{pandas}, facilita la visualización de los datos obtenidos de las ejecuciones de los distintos algoritmos bajo diferentes escenarios.
-\end{mdframed}
+\vspace{0.5 cm}
 
-\begin{mdframed}
-    Debido a la naturaleza de las pruebas en un entorno computacional, los tiempos de ejecución pueden variar significativamente dependiendo de factores externos, como la carga del sistema en el momento de la ejecución. Por lo tanto, para obtener una medida más representativa, siempre es recomendable ejecutar múltiples pruebas con las mismas características de entrada y calcular el promedio de los resultados.
-\end{mdframed}
+Cada caso fue almacenado en el archivo inputs.txt, siguiendo el formato solicitado en el enunciado: un número inicial K que indica la cantidad de casos, seguido por K pares de líneas que contienen la longitud y el contenido de cada cadena. Los resultados correspondientes fueron escritos en el archivo outputs.txt, y las mediciones de tiempo y de longitud fueron registradas en measurements.txt.
+
+\vspace{0.5 cm}
+
+Cabe destacar que los casos de prueba fueron generados automáticamente mediante un script en Python, lo que garantiza la reproducibilidad de los datos y la coherencia en el análisis. No se incorporaron casos externos al formato definido por el enunciado. Esta generación de datos permite un análisis representativo del desempeño de los algoritmos.

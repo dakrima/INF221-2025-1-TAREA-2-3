@@ -1,21 +1,13 @@
-\begin{mdframed}
-    \textbf{La extensión máxima para esta sección es de 5 páginas.}
-\end{mdframed}
+En este trabajo se analizan dos enfoques fundamentales para resolver el problema de detección de diferencias entre secuencias de texto a partir de la subsecuencia común más larga: el enfoque de fuerza bruta y el de programación dinámica. Ambos algoritmos abordan el mismo objetivo pero lo hacen desde perspectivas distintas, cada una con sus ventajas y limitaciones en cuanto a eficiencia, escalabilidad y complejidad de implementación.
 
-Diseñar un algoritmo por cada técnica de diseño de algoritmos mencionada en la sección de objetivos. Cada algoritmo debe resolver el problema de encontrar las diferencias de dos secuencias $s$ y $t$.
+\vspace{0.5 cm}
 
-\begin{itemize}
-    \item Describir la solución diseñada. 
-    \item Incluir pseudocódigo (ver ejemplo \cref{alg:mi_algoritmo_1})
-    \item Analizar la complejidad temporal y espacial de los algoritmos diseñados en términos de las longitudes de las secuencias de entrada $s$ y $t$.
-\end{itemize}
+El enfoque de fuerza bruta se basa en la exploración exhaustiva de todas las posibles subsecuencias comunes entre dos cadenas, utilizando técnicas de backtracking. Esta estrategia permite encontrar la subsecuencia común más larga probando cada combinación posible, lo que asegura una solución correcta, aunque a un alto costo computacional. Este método es útil para comprender el comportamiento del problema en instancias pequeñas, ya que considera todos los caminos posibles. Sin embargo, su complejidad crece de forma exponencial con el tamaño de las cadenas, lo que limita seriamente su aplicabilidad a casos reales de gran tamaño.
 
-Los pseudocódigos los he diseñado utilizando el paquete \citetitle{algorithm2e} \cite{algorithm2e} para la presentación de algoritmos. Se recomienda consultar \citetitle{ctan-algorithm2e} \cite{ctan-algorithm2e} y \citetitle{overleaf-algorithms} \cite{overleaf-algorithms}.
+\vspace{0.5 cm}
 
-\begin{mdframed}
-    Recuerde que lo importante es diseñar algoritmos que cumplan con los paradigmas especificados. 
-\end{mdframed}
+Por su parte, el enfoque de programación dinámica resuelve el mismo problema de manera mucho más eficiente. Se basa en dividir el problema en subproblemas más pequeños y almacenar los resultados intermedios. Esto evita el cálculo repetido y mejora considerablemente el tiempo de ejecución. Este enfoque permite escalar a instancias de mayor tamaño, manteniendo su complejidad, lo que lo hace particularmente adecuado para contextos prácticos como la comparación de documentos o secuencias biológicas.
 
-\begin{mdframed}
-    Si se utiliza algún código, idea, o contenido extraído de otra fuente, este \textbf{debe} ser citado en el lugar exacto donde se utilice, en lugar de mencionarlo al final del informe. 
-\end{mdframed}
+\vspace{0.5 cm}
+
+A continuación, se presenta un análisis detallado de cada algoritmo. Este análisis permitirá comparar ambos métodos y evidenciar por qué la programación dinámica resulta más adecuada para instancias grandes, sin dejar de valorar lo que ofrece la implementación por fuerza bruta.

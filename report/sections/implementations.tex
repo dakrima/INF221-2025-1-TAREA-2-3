@@ -1,15 +1,33 @@
-\begin{mdframed}
-    \textbf{La extensión máxima para esta sección es de 1 página.}
-\end{mdframed}
-\begin{mdframed}
-    Cada algoritmo debe implementarse en el lenguaje de programación C++, siguiendo los formatos de entrada y salida.
-\end{mdframed}
-Aquí deben explicar la estructura de sus programas haciendo referencias a los archivos y funciones de su entrega. \textbf{No adjunte código en esta sección}.
+La implementación de esta tarea fue desarrollada en C++ y organizada de manera separada para facilitar la modularización entre los distintos algoritmos y el manejo de archivos de entrada/salida. A continuación, se describe la estructura general del proyecto:
 
-Agregar la url del repositorio de GitHub donde se encuentra el código fuente de la tarea. Recordar que el repositorio \textbf{debe ser privado}, ya que de lo contrario cualquier persona podrá acceder a su código y cometer plagio, siendo usted responsable de ello. 
+\begin{itemize}
+    \item \texttt{code:} Carpeta principal que contiene todo el código fuente, subdividido por paradigma.
+    \begin{itemize}
+        \item \texttt{brute\_force:} Contiene la implementación del algoritmo de fuerza bruta. Incluye a:
+        \begin{itemize}
+            \item \texttt{brute\_force.cpp:} Archivo principal que lee los datos de entrada, ejecuta el algoritmo y guarda los resultados.
+            \item \texttt{algorithm/sequence\_difference.cpp y algorithm/sequence\_difference.h:} Implementan la lógica del cálculo de diferencias a partir de la LCS utilizando fuerza bruta.
+            \item \texttt{makefile}
+        \end{itemize}
+        \item \texttt{dynamic\_programming:} Contiene la implementación del algoritmo basado en programación dinámica. Tiene una estructura similar a \texttt{brute\_force}, pero con una lógica optimizada.
+    \end{itemize}
+    \item \texttt{data:} Carpeta donde se organizan los datos de prueba y resultados:
+    \begin{itemize}
+        \item \texttt{inputs.txt:} Archivo con los casos de prueba utilizados
+        \item \texttt{outputs.txt:} Resultados generados por los algoritmos.
+        \item \texttt{measurements.txt:} Contiene las mediciones de tiempo de ejecución y tamaño de entrada para cada ejecución de ambos algoritmos.
+        \item \texttt{plots:} Carpeta donde se guardan las gráficas generadas con Python.
+    \end{itemize}
+    \item \texttt{scripts:} Contiene scripts auxiliares en Python que automatizan tareas como:
+    \begin{itemize}
+        \item \texttt{input\_generator.py:} Genera automáticamente casos de prueba en el formato que se pide en la tarea.
+        \item \texttt{plot\_generator.py:} Lee las mediciones y genera gráficos del rendimiento de los algoritmos.
+
+    \end{itemize}
+\end{itemize}
 
 \begin{mdframed}
     \begin{center}
-        {\Large \url{https://github.com/pabloealvarez/INF221-2025-1-TAREA-1}}
+        {\Large \url{https://github.com/dakrima/INF221-2025-1-TAREA-2-3}}
     \end{center}
 \end{mdframed}

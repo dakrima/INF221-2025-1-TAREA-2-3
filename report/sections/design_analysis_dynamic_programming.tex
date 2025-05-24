@@ -1,65 +1,116 @@
 
-\epigraph{\textit{Dynamic programming is not about filling in tables. It's about smart recursion!}}{\citeauthor{algorithms_erickson}, \citeyear{algorithms_erickson} \cite{algorithms_erickson}}
-
-\begin{enumerate}[1)]
-    \item Describa la solución recursiva.
-    \item Escriba la relación de recurrencia, incluyendo condiciones y casos base.
-    \item Identifique subproblemas.
-    \item Defina estructura de datos a utilizar y especifique el orden de calculo que realiza su programa que utiliza programación dinámica. 
-\end{enumerate}
+El enfoque de programación dinámica garantiza una solución correcta, donde cada subproblema se resuelve exactamente una vez y sus resultados se almacenan para reutilizarlos cuando sea necesario. De esta forma se evita la explosión de llamadas recursivas típica de la fuerza bruta. La complejidad temporal del algoritmo por programación dinámica corresponde a: \[O{(n \times m)}\] pues cada celda se computa en tiempo constante. En cuanto a memoria, la tabla ocupa el mismo orden: \[O{(n \times m)}\]
 
 \subsubsection{Descripción de la solución recursiva}
 
+Pensemos en dos cadenas, $S$ (largo $n$) y $T$ (largo $m$).
+Para cualquier par de índices $(i,j)$ llamo $L(i,j)$ a la cantidad de letras que comparte la subsecuencia común más larga entre los primeros $i$ caracteres de $S$ y los primeros $j$ de $T$. Si alguno de los dos prefijos está vacío, no hay nada que comparar: $L(0,j)=L(i,0)=0$.
+
+El resto lo decidimos de la siguiente manera:
+
+\begin{itemize}
+  \item \textbf{Coinciden los últimos caracteres}.  
+        Cuando $S_i$ y $T_j$ son iguales, simplemente
+        “heredo” la mejor solución de los prefijos que los preceden y
+        le sumo uno:
+        \[L(i,j) = 1 + L(i-1,\,j-1).\]
+  \item \textbf{No coinciden}.  
+        Aquí pruebo dos caminos:  
+        \begin{enumerate}
+          \item Ignoro el último carácter de $S$ y miro $L(i-1,j)$.
+          \item Ignoro el último de $T$ y miro $L(i,j-1)$.
+        \end{enumerate}
+        Me quedo con el que deje una subsecuencia más larga:
+        \[L(i,j) = \max\!\bigl(L(i-1,\,j),\,L(i,\,j-1)\bigr).\]
+\end{itemize}
+
+Una vez llenada toda la tabla, el valor de la esquina inferior derecha,
+$L(n,m)$, me dice cuántas letras tiene la LCS completa.
+Para saber cuáles son, camino desde esa esquina hacia arriba-izquierda siguiendo los pasos que no cambian el valor, hasta volver al origen $(0,0)$.
+
 \subsubsection{Relación de recurrencia}
+
+La tabla \(L\) se llena utilizando la siguiente lógica: Si las letras finales de los prefijos coinciden, me cuelgo de la mejor
+solución que ya tenía arriba y a la izquierda y le sumo uno.  
+Si no, comparo lo que obtengo al saltarme el último carácter de \(S\) con lo que obtengo al saltarme el de \(T\), y me quedo con el mayor de los dos.
 
 \subsubsection{Identificación de subproblemas}
 
+La gracia de la PD está en partir el problema grande en problemas más chiquititos.
+
+Cada casilla \((i,j)\) de la matriz pregunta: “¿cuántos caracteres tiene la LCS entre \(S[1..i]\) y \(T[1..j]\)?”.
+De ese modo aparecen \((n+1)(m+1)\) subproblemas. Para resolver uno cualquiera sólo necesito, como máximo, los tres vecinos
+inmediatos: \[(i{-}1,\,j),\quad(i,\,j{-}1),\quad(i{-}1,\,j{-}1).\]
+
 \subsubsection{Estructura de datos y orden de cálculo}
 
-\subsubsection{Algoritmo utilizando programación dinámica}
+\begin{itemize}
+  \item \texttt{matrizDP}: tabla \((n{+}1)\times(m{+}1)\) con los valores \(L(i,j)\).
+  \item \texttt{Llenado}: bottom-up, cada casilla usa los tres vecinos ya calculados.
+\end{itemize}
 
-
+\subsubsection{Algoritmo utilizando programación dinámica \cite{GfG2025LCS} \cite{CLRS2009DP}}
 
 \begin{algorithm}[H]
-
     \SetKwProg{myproc}{Procedure}{}{}
-    \SetKwFunction{AlgorithmName}{AlgorithmName}  % Cambia 'AlgorithmName' por el nombre del enfoque elegido
-    \SetKwFunction{AuxiliaryFunction}{AuxiliaryFunction}  % Función auxiliar de ejemplo
-    
+    \SetKwFunction{LCSDP}{LCSDP}
+    \SetKwFunction{SequenceDifference}{SequenceDifference}
+
     \DontPrintSemicolon
     \footnotesize
 
-    % Definición del algoritmo principal
-    \myproc{\AlgorithmName{S1, S2}}{
-    \uIf{S1 está vacía}{
-        \Return longitud de S2\;  % Return explícito si S1 está vacía
-    }
-    \uElseIf{S2 está vacía}{
-        \Return longitud de S1\;  % Return explícito si S2 está vacía
-    }
-    \uElseIf{S1[0] = S2[0]}{
-        \Return \AlgorithmName{S1[1:], S2[1:]}  % Llamada recursiva
-    }
-    \Else{
-        % Ejemplo de llamado a una función auxiliar
-        $costo \leftarrow \AuxiliaryFunction{S1, S2}$\;
-        \Return costo\;  % Retornar el valor calculado
-    }
+    \myproc{\LCSDP{$S,\,T$}}{
+        $n \leftarrow |S|$,\; $m \leftarrow |T|$\;
+        crear matriz $L[0..n][0..m]$ inicializada en $0$\;
+        \For{$i \gets 1$ \KwTo $n$}{
+            \For{$j \gets 1$ \KwTo $m$}{
+                \uIf{$S_{i}=T_{j}$}{
+                    $L[i][j] \leftarrow 1 + L[i-1][j-1]$\;
+                }\Else{
+                    $L[i][j] \leftarrow \max\bigl(L[i-1][j],\,L[i][j-1]\bigr)$\;
+                }
+            }
+        }
+        $i \leftarrow n$,\; $j \leftarrow m$,\; $\text{lcs} \leftarrow \varepsilon$\;
+        \While{$i>0$ \textbf{and} $j>0$}{
+            \uIf{$S_{i}=T_{j}$}{
+                agregar\_al\_principio $S_{i}$ a \text{lcs};\ $i\!-\!-$;\ $j\!-\!-$\;
+            }\uElseIf{$L[i-1][j] \ge L[i][j-1]$}{
+                $i\!-\!-$\;
+            }\Else{
+                $j\!-\!-$\;
+            }
+        }
+        \Return \text{lcs}\;
     }
 
-    % Definición de la función auxiliar
-    \myproc{\AuxiliaryFunction{S1, S2}}{
-    % Acciones o cálculos auxiliares
-    \uIf{S1 y S2 son similares}{
-        \Return algún valor o costo\;  % Retornar el valor calculado por la función auxiliar
+    \myproc{\SequenceDifference{$S,\,T$}}{
+        $\text{lcs} \leftarrow$ \LCSDP{$S,\,T$}\;
+        diferencias $\leftarrow []$\;
+        $i,j,k \leftarrow 0$\;
+
+        \While{$i < |S|$ \textbf{or} $j < |T|$}{
+            \uIf{$k < |\text{lcs}|$ \textbf{and} $i<|S|$ \textbf{and} $j<|T|$
+                 \textbf{and} $S_i = T_j = \text{lcs}_k$}{
+                $i++,\,j++,\,k++$\;
+            }\Else{
+                bloqueS, bloqueT $\leftarrow \varepsilon$\;
+                \While{$i < |S|$ \textbf{and}
+                       ($k \ge |\text{lcs}|$ \textbf{or} $S_i \neq \text{lcs}_k$)}{
+                    append $S_i$ a bloqueS;\ $i++$\;
+                }
+                \While{$j < |T|$ \textbf{and}
+                       ($k \ge |\text{lcs}|$ \textbf{or} $T_j \neq \text{lcs}_k$)}{
+                    append $T_j$ a bloqueT;\ $j++$\;
+                }
+                \If{bloqueS $\neq \varepsilon$ \textbf{or} bloqueT $\neq \varepsilon$}{
+                    append $(\text{bloqueS},\,\text{bloqueT})$ a diferencias\;
+                }
+            }
+        }
+        \Return diferencias\;
     }
-    \Else{
-        % Llamar de nuevo a la función principal
-        \Return \AlgorithmName{S1 modificado, S2}\;  % Llamada recursiva y retorno del resultado
-    }
-    }
-    \caption{Este es solo un ejemplo de cómo estructurar el pseudocódigo, con retornos explícitos y llamados a funciones.}
-    \label{alg:mi_algoritmo_2}
+
+    \caption{Diferencias entre dos secuencias usando PD}
+    \label{alg:seqdiff_dp}
 \end{algorithm}
-
-Todo lo correspondiente a esta sección es, digamos, en ``\href{https://dle.rae.es/metáfora}{lapiz y papel}'', en el sentido de que no necesita de implementaciones ni resultados experimentales. 
